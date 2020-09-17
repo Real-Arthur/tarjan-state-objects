@@ -44,6 +44,11 @@ class Creatures extends Component {
        })
     }
 
+    loveIt = (event, value) => {
+        console.log('I love it', event, value);
+
+    }
+
     render() {
         /*
         ///////////// One Way!
@@ -76,12 +81,25 @@ class Creatures extends Component {
 
         return (
             <div>
-                <input type="text" placeholder="New Creature Name" value={this.state.newCreatureName} onChange={this.onChangeCreatureName} />
+                <h1>Featured Creature of the Night</h1>
+                <h3>{this.props.creatureProp}</h3>
+
+                {/* shouldn't have to scroll sideways */}
+                {/* makes code easier to read */}
+                <input 
+                type="text" 
+                placeholder="New Creature Name" 
+                value={this.state.newCreatureName} 
+                onChange={this.onChangeCreatureName} 
+                />
                 <button onClick={this.onAddCreature}>Add Creature</button>
                 <ul>
                     {/* called straight into return instead of render */}
-                    {this.state.creatures.map(creature => 
-                    <li key={creature}>{creature}<button>Cool</button></li>
+                    {this.state.creatures.map((creature, i) => 
+                    // new unique key based on index value in array
+                    <li key={i}>
+                        <em>{creature}</em>
+                    <button onClick={() => this.loveIt(creature)}>Love It</button></li>
                     )}
                     
                 </ul>

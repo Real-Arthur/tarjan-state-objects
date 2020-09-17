@@ -8,6 +8,7 @@ class App extends Component {
   state = {
     cohortName: 'Tarjan',
     salutation: 'Swing Swing',
+    creatureOfTheNight: 'tbd',
     user: {
       name: 'Arthur',
       whereILive: 'Uptown',
@@ -53,11 +54,19 @@ class App extends Component {
     })
   }
 
+  onChangeCreature = (event) => {
+    console.log('test creature', event.target.value);
+    this.setState({
+      creatureOfTheNight: event.target.value
+    })
+  }
+
   render() {
     console.log('state', this.state)
     return (
       <div>
       <h1>{this.state.cohortName} State Learning</h1>
+
 
           <div>
             {this.state.salutation}! My name is {this.state.user.name}
@@ -71,8 +80,11 @@ class App extends Component {
           <h4>Edit user form</h4>
           <input type="text" placeholder="Favorite Pizza Topping" onChange={this.onChangePizza}/>
 
+          <h4>Creature of the Night</h4>
+          <input type="text" placeholder="Creature of the Night" onChange={this.onChangeCreature}/>
+          
           <h4>Mythical Creatures</h4>
-          <Creatures />
+          <Creatures creatureProp={this.state.creatureOfTheNight}/>
       </div>
     )
   }
