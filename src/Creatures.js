@@ -1,8 +1,8 @@
 import React, { Component } from "react";
+import CreatureForm from './CreatureForm'
 
 class Creatures extends Component {
     state = {
-        newCreatureName: '',
         creatures: [
             'Unicorn',
             'Sphinx',
@@ -12,21 +12,15 @@ class Creatures extends Component {
         ]
     }
     
-    /// staging zone  for new thing
-    onChangeCreatureName = (event) => {
-        let newCreatureName = event.target.value;
-        this.setState({
-            newCreatureName: newCreatureName
-        })
-    }
+    
 
-    onAddCreature = (event) => {
+    onAddCreature = (creatureParam) => {
         // Add creature to state
 
         /* jQuery style
         let newCreature = $('input').val();
         */
-       console.log('new creature is', this.state.newCreatureName);
+       console.log('new creature is', creatureParam);
 
        /* Dont do this
        // Don't mutate the STATE
@@ -39,7 +33,7 @@ class Creatures extends Component {
            creatures: [
             // use spread operator and add new thing
             ...this.state.creatures,
-            this.state.newCreatureName
+            creatureParam
            ]
        })
     }
@@ -84,15 +78,11 @@ class Creatures extends Component {
                 <h1>Featured Creature of the Night</h1>
                 <h3>{this.props.creatureProp}</h3>
 
-                {/* shouldn't have to scroll sideways */}
-                {/* makes code easier to read */}
-                <input 
-                type="text" 
-                placeholder="New Creature Name" 
-                value={this.state.newCreatureName} 
-                onChange={this.onChangeCreatureName} 
-                />
-                <button onClick={this.onAddCreature}>Add Creature</button>
+                
+                {/* passing something down to a child */}
+                {/* multiple props */}
+                <CreatureForm currentState={this.state} onAddCreature={this.onAddCreature}/>
+
                 <ul>
                     {/* called straight into return instead of render */}
                     {this.state.creatures.map((creature, i) => 
